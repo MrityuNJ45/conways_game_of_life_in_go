@@ -2,9 +2,9 @@ package board
 
 import (
 	"conwaysgameoflife/cell"
+	"conwaysgameoflife/utility"
 	"errors"
 	"fmt"
-
 	"math/rand"
 )
 
@@ -30,24 +30,24 @@ func NewBoard(rows, columns int) (Board, error) {
 	return Board{rows: rows, columns: columns, matrix: matrix}, nil
 }
 
-func(b Board) Equals(otherBoard Board) bool {
+func (b Board) Equals(otherBoard Board) bool {
 
-	if(b.rows != otherBoard.rows || b.columns != otherBoard.columns){
-		return false;
+	if b.rows != otherBoard.rows || b.columns != otherBoard.columns {
+		return false
 	}
 
 	for row := 0; row < b.rows; row++ {
 		for column := 0; column < b.columns; column++ {
 			if b.matrix[row][column].IsAlive() != otherBoard.matrix[row][column].IsAlive() {
-				return false;
+				return false
 			}
 		}
 	}
-	return true;
+	return true
 
 }
 
-func (b Board) Populate() Board{
+func (b Board) Populate() Board {
 
 	matrix := make([][]cell.Cell, b.rows)
 	for i := range matrix {
@@ -63,13 +63,19 @@ func (b Board) Populate() Board{
 
 		}
 	}
-	return Board{rows : b.rows, columns: b.columns, matrix: matrix}
-	
+	return Board{rows: b.rows, columns: b.columns, matrix: matrix}
 
 }
 
 func (b Board) NextGenerationBoard() Board {
 
- 
-
+	matrix := make([][]cell.Cell, b.rows)
+	for row := range matrix {
+		matrix[row] = make([]cell.Cell, b.columns)
+		for column := range matrix[row] {
+			numOfLiveNeighbours := utility.NumberOfLiveNeighboursAt(row, column, b.matrix)
+			matrix[row][column] = b.matrix[row][column].NextGenerationCell(numOfLiveNeighbours)
+		}
+	}
+	return Board{rows: b.rows, columns: b.columns, matrix: matrix}
 }

@@ -2,7 +2,7 @@ package board
 
 import (
 	"conwaysgameoflife/cell"
-	"fmt"
+	
 	"testing"
 )
 
@@ -78,13 +78,24 @@ func TestEquals(t *testing.T) {
 func TestPoplulate(t *testing.T) {
 
 	board, _ := NewBoard(3, 3)
+
+	populatedBoard := board.Populate()
 	
-	populatedBoard := board.Populate();
-	fmt.Println(board)
 	if board.Equals(populatedBoard) {
 		t.Errorf("Expects boards to be unequal, but they are equal")
 	}
 
 }
 
+func TestNextGenerationBoard(t *testing.T) {
 
+	board, _ := NewBoard(3,3);
+
+	populatedBoard := board.Populate();
+	nextGenerationBoard := populatedBoard.NextGenerationBoard();
+
+	if populatedBoard.Equals(nextGenerationBoard){
+		t.Errorf("Expected boards to be different, but they are equal");
+	}
+
+}
