@@ -68,4 +68,8 @@ func (b Board) Populate() Board{
 
 }
 
+func (b Board) NextGenerationBoard() Board {
 
+ 
+
+}
