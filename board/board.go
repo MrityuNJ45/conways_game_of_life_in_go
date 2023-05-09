@@ -54,7 +54,7 @@ func (b Board) Populate() Board {
 		matrix[i] = make([]cell.Cell, b.columns)
 		for j := range matrix[i] {
 			random := rand.Intn(2)
-			fmt.Println(random)
+
 			if random == 1 {
 				matrix[i][j] = cell.NewCell(true)
 			} else {
@@ -78,4 +78,23 @@ func (b Board) NextGenerationBoard() Board {
 		}
 	}
 	return Board{rows: b.rows, columns: b.columns, matrix: matrix}
+}
+
+
+func (b Board) Print() {
+
+	matrix := b.matrix;
+
+	for row := range matrix {
+		for column := range matrix[row] {
+			cellAt := matrix[row][column];
+			if(cellAt.IsAlive()){
+				fmt.Print("* ");
+				continue
+			}
+			fmt.Print("_ ")
+		}
+		fmt.Println()
+	}
+	
 }
