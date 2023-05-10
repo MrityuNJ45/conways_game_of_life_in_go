@@ -3,6 +3,7 @@ package main
 import (
 	"conwaysgameoflife/board"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -33,11 +34,12 @@ func main() {
 			board.Print()
 		}
 		fmt.Println("============================")
-		if input == 3 {
-			fmt.Println("Thank you for playing thr game...")
-			break
+		if (input != 1 && input != 2 && input != 3) {
+			fmt.Println("Invalid Input.....");
+			os.Exit(0)
 		}
 
 	}
+	fmt.Println("Thank you for playing the game!")
 
 }
