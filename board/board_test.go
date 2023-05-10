@@ -7,7 +7,7 @@ import (
 )
 
 func TestNewBoard(t *testing.T) {
-	// Test for valid board creation
+	
 	rows := 3
 	columns := 4
 	board, err := NewBoard(rows, columns)
@@ -27,7 +27,7 @@ func TestNewBoard(t *testing.T) {
 		t.Errorf("Expected matrix to have %v columns but got %v", columns, len(board.matrix[0]))
 	}
 
-	// Test for invalid rows and columns
+	
 	_, err = NewBoard(-1, 5)
 	if err == nil {
 		t.Errorf("Expected error for negative rows")
@@ -52,7 +52,6 @@ func TestEquals(t *testing.T) {
 		t.Errorf("Expect boards to be unequal, but they were equal")
 	}
 
-	// testing for same dimensions but different matrix.
 	board3, _ := NewBoard(3, 3)
 	board4, _ := NewBoard(3, 3)
 
